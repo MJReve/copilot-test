@@ -2,6 +2,7 @@ package com.citi.tts.copilot.controller;
 
 import com.citi.tts.copilot.model.Holiday;
 import com.citi.tts.copilot.model.Response;
+import com.citi.tts.copilot.model.UpdateHolidayRequest;
 import com.citi.tts.copilot.repository.Holidays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +28,17 @@ public class HolidayController {
         return Response.of(holiday).toJson();
     }
 
+    @PostMapping("/holidays/{country-code}/{holiday-date}")
+    public String updateHoliday(
+            @PathVariable("country-code") String countryCode, @PathVariable("holiday-date") String holidayDate,
+            @RequestBody UpdateHolidayRequest request) {
+
+        return Response.of(holidays.updateHoliday(countryCode, holidayDate, request)).toJson();
+    }
+
     /**
      * Query 3: Get holiday by holiday date
+     *
      * @param holidayDate
      * @return
      */

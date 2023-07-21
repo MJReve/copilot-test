@@ -1,6 +1,7 @@
 package com.citi.tts.copilot.repository;
 
 import com.citi.tts.copilot.model.Holiday;
+import com.citi.tts.copilot.model.UpdateHolidayRequest;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
@@ -65,5 +66,19 @@ public class Holidays {
     public List<Holiday> getAllHolidays() {
         // return all holidays
         return holidays.values().stream().toList();
+    }
+
+    synchronized public Holiday updateHoliday(String countryCode, String holidayDate, UpdateHolidayRequest request) {
+        // create holiday key
+        String holidayKey = countryCode + ":" + holidayDate;
+        // find holiday by country code and holiday date
+        // if holiday not found, throw exception
+        if (!holidays.containsKey(holidayKey)) {
+            throw new RuntimeException("Holiday not found");
+        }
+        // update holiday
+        Holiday holiday = new Holiday(countryCode, request.getCountryDesc(), holidayDate, request.getHolidayName());
+        holidays.put(holidayKey, holiday);
+        return holiday;
     }
 }
