@@ -81,4 +81,15 @@ public class Holidays {
         holidays.put(holidayKey, holiday);
         return holiday;
     }
+
+    synchronized public Holiday deleteHoliday(String countryCode, String holidayDate) {
+        // create holiday key
+        String holidayKey = countryCode + ":" + holidayDate;
+        // find holiday by country code and holiday date
+        // if holiday not found, throw exception
+        if (!holidays.containsKey(holidayKey)) {
+            throw new RuntimeException("Holiday not found");
+        }
+        return holidays.remove(holidayKey);
+    }
 }

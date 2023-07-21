@@ -36,6 +36,14 @@ public class HolidayController {
         return Response.of(holidays.updateHoliday(countryCode, holidayDate, request)).toJson();
     }
 
+    @DeleteMapping("/holidays/{country-code}/{holiday-date}")
+    public String deleteHoliday(
+            @PathVariable("country-code") String countryCode, @PathVariable("holiday-date") String holidayDate) {
+
+        return Response.of(holidays.deleteHoliday(countryCode, holidayDate)).toJson();
+    }
+
+
     /**
      * Query 3: Get holiday by holiday date
      *
