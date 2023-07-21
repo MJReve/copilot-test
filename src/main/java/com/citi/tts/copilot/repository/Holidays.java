@@ -53,4 +53,17 @@ public class Holidays {
                 .toList();
     }
 
+    synchronized public Holiday createHoliday(Holiday holiday) {
+        // validate uniqueness of holiday
+        if (holidays.containsKey(holiday.key())) {
+            throw new RuntimeException("Holiday already exists");
+        }
+        holidays.put(holiday.key(), holiday);
+        return holiday;
+    }
+
+    public List<Holiday> getAllHolidays() {
+        // return all holidays
+        return holidays.values().stream().toList();
+    }
 }
