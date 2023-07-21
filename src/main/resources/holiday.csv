@@ -1,0 +1,24 @@
+countryCode,countryDesc,holidayDate,holidayName
+US,United States,2020-01-01,New Year's Day
+US,United States,2020-01-20,Martin Luther King Jr. Day
+US,United States,2020-02-17,Presidents' Day
+US,United States,2020-05-25,Memorial Day
+US,United States,2020-07-03,Independence Day
+US,United States,2020-09-07,Labor Day
+US,United States,2020-10-12,Columbus Day
+US,United States,2020-11-11,Veterans Day
+US,United States,2020-11-26,Thanksgiving Day
+US,United States,2020-12-25,Christmas Day
+US,United States,2021-01-01,New Year's Day
+US,United States,2021-01-18,Martin Luther King Jr. Day
+US,United States,2021-02-15,Presidents' Day
+US,United States,2021-05-31,Memorial Day
+US,United States,2021-07-05,Independence Day
+US,United States,2021-09-06,Labor Day
+US,United States,2021-10-11,Columbus Day
+CN,China,2020-01-01,New Year's Day
+CN,China,2020-05-01,Labor Day
+CN,China,2020-10-01,National Day
+CN,China,2021-01-01,New Year's Day
+CN,China,2021-05-01,Labor Day
+CN,China,2021-10-01,National Day
