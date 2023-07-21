@@ -92,4 +92,14 @@ public class Holidays {
         }
         return holidays.remove(holidayKey);
     }
+
+    public List<Holiday> getHolidaysByYear(int year) {
+        return holidays.entrySet().stream()
+                // filter holidays by year
+                .filter(entry -> entry.getKey().split(":")[1].split("-")[0].equals(String.valueOf(year)))
+                // map entry to holiday
+                .map(entry -> entry.getValue())
+                // collect holidays to a list
+                .toList();
+    }
 }
