@@ -46,4 +46,8 @@ public class Holiday {
     public String getHolidayDate() {
         return holidayDate;
     }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
 }

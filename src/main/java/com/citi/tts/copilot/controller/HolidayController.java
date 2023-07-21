@@ -1,5 +1,6 @@
 package com.citi.tts.copilot.controller;
 
+import com.citi.tts.copilot.model.CountryHolidayData;
 import com.citi.tts.copilot.model.Holiday;
 import com.citi.tts.copilot.model.Response;
 import com.citi.tts.copilot.model.UpdateHolidayRequest;
@@ -46,7 +47,7 @@ public class HolidayController {
 
 
     /**
-     * Query 3: Get holiday by holiday date
+     * Query 3 (return holiday details): Get holiday by holiday date
      *
      * @param holidayDate
      * @return
@@ -57,6 +58,34 @@ public class HolidayController {
     public String getHolidayByDate(@PathVariable("holiday-date") String holidayDate) {
         List<Holiday> holidayByDate = holidays.getHolidayByDate(holidayDate);
         return Response.of(holidayByDate).toJson();
+    }
+
+    /**
+     * Query 3 (return whether holiday for all countries): Get holiday by holiday date
+     *
+     * @param holidayDate
+     * @return
+     */
+    @GetMapping("/holidays/{holiday-date}/countries")
+    @ResponseBody
+    public String checkHolidayForAllCountries(@PathVariable("holiday-date") String holidayDate) {
+        List<String> countries = holidays.getAllCountries();
+        List<Holiday> holidayByDate = holidays.getHolidayByDate(holidayDate);
+        // get country list in holidayByDate
+        List<String> countriesInHolidayByDate = holidayByDate.stream()
+                .map(Holiday::getCountryCode)
+                .toList();
+        CountryHolidayData data = new CountryHolidayData();
+        for (String country : countries) {
+            if (countriesInHolidayByDate.contains(country)) {
+                data.addIsHoliday(country);
+            } else {
+                data.addNotHoliday(country);
+            }
+
+        }
+
+        return Response.of(data).toJson();
     }
 
     /**

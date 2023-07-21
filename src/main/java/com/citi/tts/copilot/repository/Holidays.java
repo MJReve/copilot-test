@@ -42,6 +42,18 @@ public class Holidays {
         logger.info("Holidays loaded: " + holidays.size());
     }
 
+    // create a method to return all supported countries
+    public List<String> getAllCountries() {
+        // stream of holiday keys
+        // map holiday keys to country codes
+        // distinct country codes
+        // collect country codes to a list
+        return holidays.keySet().stream()
+                .map(holidayKey -> holidayKey.split(":")[0])
+                .distinct()
+                .toList();
+    }
+
     // create a method to return holiday by holiday date
     public List<Holiday> getHolidayByDate(String holidayDate) {
         // stream of holiday keys
