@@ -43,4 +43,7 @@ public class Holiday {
         return h.countryCode.equals(countryCode) && h.countryDesc.equals(countryDesc) && h.holidayDate.equals(holidayDate) && h.holidayName.equals(holidayName);
     }
 
+    public String getHolidayDate() {
+        return holidayDate;
+    }
 }

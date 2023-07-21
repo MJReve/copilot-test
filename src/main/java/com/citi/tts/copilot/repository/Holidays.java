@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Component
 public class Holidays {
@@ -101,5 +101,25 @@ public class Holidays {
                 .map(entry -> entry.getValue())
                 // collect holidays to a list
                 .toList();
+    }
+
+    public Holiday getNextHolidayFromDateForCountry(String countryCode, LocalDate date) {
+        // create date format yyyy-MM-dd
+        String countryDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        // get holidays by country code
+        List<Holiday> holidaysByCountry = new ArrayList<>(getHolidayByCountry(countryCode));
+        holidaysByCountry.sort(Comparator.comparing(Holiday::getHolidayDate));
+        // filter stream of holidays by date
+        // find first holiday
+        return holidaysByCountry.stream()
+                .filter(holiday -> holiday.getHolidayDate().compareTo(countryDate) > 0)
+                .findFirst()
+                .orElse(null);
+    }
+
+    private List<Holiday> getHolidayByCountry(String countryCode) {
+        return holidays.keySet().stream()
+                .filter(holidayKey -> holidayKey.startsWith(countryCode))
+                .map(holidayKey -> holidays.get(holidayKey)).toList();
     }
 }

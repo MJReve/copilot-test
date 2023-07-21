@@ -59,12 +59,30 @@ public class HolidayController {
         return Response.of(holidayByDate).toJson();
     }
 
+    /**
+     * Query 1: Get next year's holidays
+     *
+     * @return
+     */
     @GetMapping("/holidays/next-year")
     @ResponseBody
     public String getNextYearHolidays() {
         LocalDate date = LocalDate.now();
         int year = date.getYear() + 1;
         return Response.of(holidays.getHolidaysByYear(year)).toJson();
+    }
+
+    /**
+     * Query 2: Get next holiday by country code
+     * @param countryCode
+     * @return
+     */
+    @GetMapping("/holidays/{country-code}/next")
+    @ResponseBody
+    public String getNextHolidayByCountryCode(@PathVariable("country-code") String countryCode) {
+        LocalDate date = LocalDate.now();
+        Holiday nextHoliday = holidays.getNextHolidayFromDateForCountry(countryCode, date);
+        return Response.of(nextHoliday).toJson();
     }
 
 }
